@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+    <!-- Basic Page Needs
+  –––––––––––––––––––––––––––––––––––––––––––––––––– -->
+    <meta charset="utf-8">
+    <title>Typing Test</title>
+    <meta name="description" content="">
+    <meta name="author" content="">
+
+    <!-- Mobile Specific Metas
+  –––––––––––––––––––––––––––––––––––––––––––––––––– -->
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+    <!-- FONT
+  –––––––––––––––––––––––––––––––––––––––––––––––––– -->
+    <link href="//fonts.googleapis.com/css?family=Raleway:400,300,600" rel="stylesheet" type="text/css">
+
+    <!-- CSS
+  –––––––––––––––––––––––––––––––––––––––––––––––––– -->
+    <link rel="stylesheet" href="css/normalize.css">
+    <link rel="stylesheet" href="css/skeleton.css">
+
+    <!-- Favicon
+  –––––––––––––––––––––––––––––––––––––––––––––––––– -->
+    <link rel="icon" type="image/png" href="images/favicon.png">
+
+</head>
+
+<style>
+    #highlight {
+        color: white;
+    }
+</style>
+
+<body>
+
+    <!-- Primary Page Layout
+  –––––––––––––––––––––––––––––––––––––––––––––––––– -->
+    <div class="container">
+        <div class="row">
+            <div class="twelve column" style="margin-top: 6%">
+                <h3>Type the paragraph below
+                    <span id="mode" class="u-pull-right" style="cursor: pointer;">🌒</span>
+                </h3>
+                <p style="font-size: 1.8rem" id="paragraph">He scolded himself for being so tentative. He knew he shouldn't be so cautious, but there was a sixth sense telling him that things weren't exactly as they appeared. It was that weird chill that rolls up your neck and makes the hair stand
+                    on end. He knew that being so tentative could end up costing him the job, but he learned that listening to his sixth sense usually kept him from getting into a lot of trouble.</p>
+                <button id="start" class="button-primary">Start</button>
+                <button id="skip" class="button u-pull-right">Skip</button>
+            </div>
+        </div>
+    </div>
+    <h4 class="container" style="margin-top: 1%">
+        <span id="time">Time: 00s</span>
+        <span id="wcount" class="u-pull-right">Alphabet Count: 00</span>
+    </h4>
+    <div class="container">
+        <div class="row">
+            <div class="twelve column" style="margin-top: 2%">
+                <textarea class="u-full-width" style="overflow: hidden" placeholder="Type here" id="txtarea"></textarea>
+            </div>
+        </div>
+    </div>
+
+    <!-- End Document
+  –––––––––––––––––––––––––––––––––––––––––––––––––– -->
+    <script type="module" src="./app.js"></script>
+</body>
+
+</html>

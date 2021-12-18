@@ -1,0 +1,7 @@
+let para = ['The robot clicked disapprovingly, gurgled briefly inside its cubical interior and extruded a pony glass of brownish liquid. "Sir, you will undoubtedly end up in a drunkard\'s grave, dead of hepatic cirrhosis," it informed me virtuously as it returned my ID card. I glared as I pushed the glass across the table.',
+    'There are only three ways to make this work. The first is to let me take care of everything. The second is for you to take care of everything. The third is to split everything 50 / 50. I think the last option is the most preferable, but I\'m certain it\'ll also mean the end of our marriage.',
+    'They argue. While the argument seems to be different the truth is it\'s always the same. Yes, the topic may be different or the circumstances, but when all said and done, it all came back to the same thing. They both knew it, but neither has the courage or strength to address the underlying issue. So they continue to argue.',
+    'Many people say that life isn\'t like a bed of roses. I beg to differ. I think that life is quite like a bed of roses. Just like life, a bed of roses looks pretty on the outside, but when you\'re in it, you find that it is nothing but thorns and pain. I myself have been pricked quite badly.'
+]
+
+export default para;
