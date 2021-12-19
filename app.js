@@ -1,4 +1,5 @@
 let time1 = Date.now();
+//Typing Master v-0.9
 
 import para from "./data.js";
 
