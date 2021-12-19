@@ -1,3 +1,5 @@
+//Typing Master v-0.9
+
 import para from "./data.js";
 
 let paragraph = document.getElementById("paragraph");
