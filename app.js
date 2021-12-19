@@ -8,13 +8,20 @@ let time = document.getElementById("time");
 let mode = document.getElementById("mode");
 let wcount = document.getElementById("wcount");
 let count = 0;
-let status = false;
-let darkMode = false;
+let status = false; //Timer is or is not
+let darkMode = false; //Dark mode is or is not
 let clearTimer;
+let paraLength = paragraph.innerText.length;
+let highlight = paragraph.innerText.split("").map(alp => {
+    return `<span class="highlight">${alp}</span>`
+});
 
-console.log(para);
+paragraph.innerHTML = highlight.join("");
 
-txtarea.style.color = "black";
+let highlightAlp = document.querySelectorAll(".highlight");
+
+console.log(highlight);
+console.log(highlightAlp);
 
 mode.onclick = function() {
     let bodyStyle = document.body.style;
@@ -24,27 +31,50 @@ mode.onclick = function() {
         bodyStyle.color = "#fff";
         darkMode = true;
         mode.innerText = "☀️";
+        txtarea.style.backgroundColor = "#161616";
     } else {
         bodyStyle.backgroundColor = "#fff";
         bodyStyle.color = "#161616";
         darkMode = false;
         mode.innerText = "🌒";
+        txtarea.style.backgroundColor = "white";
     }
 }
 
 start.onclick = function() {
-    alert("hello world")
-}
-
-skip.onclick = function() {
-    paragraph.innerText = para[Math.floor(Math.random() * 4)];
+    alert("Reset Success!");
+    paraLength = paragraph.innerText.length;
     count = 0;
     txtarea.value = "";
+    txtarea.style.height = "";
     stopTimer();
     time.innerText = "Time: 00s";
     status = false;
     wcount.innerText = "Alphabet Count: 00";
     txtarea.disabled = false;
+    highlight = paragraph.innerText.split("").map(alp => {
+        return `<span class="highlight">${alp}</span>`
+    });
+    paragraph.innerHTML = highlight.join("");
+    highlightAlp = document.querySelectorAll(".highlight");
+}
+
+skip.onclick = function() {
+    paragraph.innerText = para[Math.floor(Math.random() * para.length)];
+    paraLength = paragraph.innerText.length;
+    count = 0;
+    txtarea.value = "";
+    txtarea.style.height = "";
+    stopTimer();
+    time.innerText = "Time: 00s";
+    status = false;
+    wcount.innerText = "Alphabet Count: 00";
+    txtarea.disabled = false;
+    highlight = paragraph.innerText.split("").map(alp => {
+        return `<span class="highlight">${alp}</span>`
+    });
+    paragraph.innerHTML = highlight.join("");
+    highlightAlp = document.querySelectorAll(".highlight");
 }
 
 txtarea.oninput = function() {
@@ -52,20 +82,21 @@ txtarea.oninput = function() {
     txtarea.style.height = txtarea.scrollHeight + "px";
     let wordLength = this.value.length;
     wcount.innerText = `Alphabet Count: ${wordLength}`;
-    if (paragraph.innerText.length < wordLength) {
+    if (paraLength <= wordLength) {
         stopTimer();
         this.disabled = true;
         let wpm = Math.round(wordLength / (count / 60));
         alert(`Your typing speed is ${wpm} alphabet per minute`);
     }
-    // let testAplhabets = paragraph.innerText.split("");
-    // let mappedAlphabet = testAplhabets.map((alp, i) => {
-    //     if (txtarea.value[i] === alp) {
-    //         return `<span id="highlight">${alp}</span>`;
-    //     } else { return alp }
-    // });
-    // paragraph.innerText = mappedAlphabet.join("");
-    //console.log(mappedAlphabet);
+
+    let userInput = this.value.split('');
+    userInput.forEach((val, i) => {
+        if (val === highlightAlp[i].innerText) {
+            highlightAlp[i].classList.add("light");
+        } else {
+            highlightAlp[i].classList.remove("light");
+        }
+    })
 };
 
 function stopTimer() {

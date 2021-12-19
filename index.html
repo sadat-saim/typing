@@ -30,8 +30,15 @@
 </head>
 
 <style>
-    #highlight {
-        color: white;
+    .light {
+        color: rgb(25, 221, 247);
+        font-weight: 600;
+    }
+    
+    textarea,
+    textarea:focus {
+        border: transparent;
+        resize: none;
     }
 </style>
 
@@ -42,12 +49,12 @@
     <div class="container">
         <div class="row">
             <div class="twelve column" style="margin-top: 6%">
-                <h3>Type the paragraph below
+                <h3>Typing <span class="light">Master</span>
                     <span id="mode" class="u-pull-right" style="cursor: pointer;">🌒</span>
                 </h3>
                 <p style="font-size: 1.8rem" id="paragraph">He scolded himself for being so tentative. He knew he shouldn't be so cautious, but there was a sixth sense telling him that things weren't exactly as they appeared. It was that weird chill that rolls up your neck and makes the hair stand
                     on end. He knew that being so tentative could end up costing him the job, but he learned that listening to his sixth sense usually kept him from getting into a lot of trouble.</p>
-                <button id="start" class="button-primary">Start</button>
+                <button id="start" class="button-primary">Reset</button>
                 <button id="skip" class="button u-pull-right">Skip</button>
             </div>
         </div>
@@ -59,7 +66,7 @@
     <div class="container">
         <div class="row">
             <div class="twelve column" style="margin-top: 2%">
-                <textarea class="u-full-width" style="overflow: hidden" placeholder="Type here" id="txtarea"></textarea>
+                <textarea spellcheck="false" class="u-full-width" style="overflow: hidden" placeholder="Type here" id="txtarea"></textarea>
             </div>
         </div>
     </div>
