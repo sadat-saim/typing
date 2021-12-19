@@ -35,10 +35,19 @@
         font-weight: 600;
     }
     
+    .wrong {
+        color: rgb(245, 21, 21);
+        font-weight: 600;
+    }
+    
     textarea,
     textarea:focus {
         border: transparent;
         resize: none;
+    }
+    
+    .subscript {
+        font-size: 1.4rem;
     }
 </style>
 
@@ -49,11 +58,10 @@
     <div class="container">
         <div class="row">
             <div class="twelve column" style="margin-top: 6%">
-                <h3>Typing <span class="light">Master</span>
+                <h3>Typing <span class="light">Master</span><sub id="wpm" class="subscript">00 wpm</sub>
                     <span id="mode" class="u-pull-right" style="cursor: pointer;">🌒</span>
                 </h3>
-                <p style="font-size: 1.8rem" id="paragraph">He scolded himself for being so tentative. He knew he shouldn't be so cautious, but there was a sixth sense telling him that things weren't exactly as they appeared. It was that weird chill that rolls up your neck and makes the hair stand
-                    on end. He knew that being so tentative could end up costing him the job, but he learned that listening to his sixth sense usually kept him from getting into a lot of trouble.</p>
+                <p style="font-size: 1.8rem" id="paragraph"></p>
                 <button id="start" class="button-primary">Reset</button>
                 <button id="skip" class="button u-pull-right">Skip</button>
             </div>

@@ -1,12 +1,18 @@
+let time1 = Date.now();
+
 import para from "./data.js";
 
 let paragraph = document.getElementById("paragraph");
+//generate paragraph randomly
+paragraph.innerText = para[Math.floor(Math.random() * para.length)];
+//
 let start = document.getElementById("start");
 let skip = document.getElementById("skip");
 let txtarea = document.getElementById("txtarea");
 let time = document.getElementById("time");
 let mode = document.getElementById("mode");
 let wcount = document.getElementById("wcount");
+let wpm = document.getElementById("wpm");
 let count = 0;
 let status = false; //Timer is or is not
 let darkMode = false; //Dark mode is or is not
@@ -17,7 +23,7 @@ let highlight = paragraph.innerText.split("").map(alp => {
 });
 
 paragraph.innerHTML = highlight.join("");
-
+//should maintatin this serial
 let highlightAlp = document.querySelectorAll(".highlight");
 
 console.log(highlight);
@@ -41,8 +47,7 @@ mode.onclick = function() {
     }
 }
 
-start.onclick = function() {
-    alert("Reset Success!");
+function reset() {
     paraLength = paragraph.innerText.length;
     count = 0;
     txtarea.value = "";
@@ -57,24 +62,17 @@ start.onclick = function() {
     });
     paragraph.innerHTML = highlight.join("");
     highlightAlp = document.querySelectorAll(".highlight");
+    wpm.innerHTML = "00 wpm";
+}
+
+start.onclick = function() {
+    alert("Reset Success!");
+    reset();
 }
 
 skip.onclick = function() {
     paragraph.innerText = para[Math.floor(Math.random() * para.length)];
-    paraLength = paragraph.innerText.length;
-    count = 0;
-    txtarea.value = "";
-    txtarea.style.height = "";
-    stopTimer();
-    time.innerText = "Time: 00s";
-    status = false;
-    wcount.innerText = "Alphabet Count: 00";
-    txtarea.disabled = false;
-    highlight = paragraph.innerText.split("").map(alp => {
-        return `<span class="highlight">${alp}</span>`
-    });
-    paragraph.innerHTML = highlight.join("");
-    highlightAlp = document.querySelectorAll(".highlight");
+    reset();
 }
 
 txtarea.oninput = function() {
@@ -90,11 +88,17 @@ txtarea.oninput = function() {
     }
 
     let userInput = this.value.split('');
+    wpm.innerText = `${Math.trunc(txtarea.value.split(" ").length)/(count/60)}`.split(".")[0] + " wpm"
     userInput.forEach((val, i) => {
         if (val === highlightAlp[i].innerText) {
+
+            if (highlightAlp[i].classList.contains("wrong")) {
+                highlightAlp[i].classList.remove("wrong");
+            }
+
             highlightAlp[i].classList.add("light");
         } else {
-            highlightAlp[i].classList.remove("light");
+            highlightAlp[i].classList.add("wrong");
         }
     })
 };
@@ -122,3 +126,7 @@ txtarea.onclick = function() {
     }
 
 }
+
+
+let time2 = Date.now();
+console.log(time2 - time1, para.length);
