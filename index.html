@@ -6,7 +6,7 @@
     <!-- Basic Page Needs
   –––––––––––––––––––––––––––––––––––––––––––––––––– -->
     <meta charset="utf-8">
-    <title>Typing Test</title>
+    <title>Typing Master</title>
     <meta name="description" content="Typing test">
     <meta name="author" content="sadat-saim">
 
@@ -30,8 +30,33 @@
 </head>
 
 <style>
+    body {
+        -webkit-tap-highlight-color: transparent;
+        -webkit-touch-callout: none;
+        -webkit-user-select: none;
+        -khtml-user-select: none;
+        -moz-user-select: none;
+        -ms-user-select: none;
+        user-select: none;
+    }
+    
     .light {
         color: rgb(25, 221, 247);
+        font-weight: 600;
+    }
+    
+    .orange {
+        color: #FF6723;
+        font-weight: 600;
+    }
+    
+    .purple {
+        color: #8D65C5;
+        font-weight: 600;
+    }
+    
+    .green {
+        color: #00D26A;
         font-weight: 600;
     }
     
@@ -42,12 +67,35 @@
     
     textarea,
     textarea:focus {
-        border: transparent;
+        border: transparent !important;
         resize: none;
+        transition: all 0.3s ease;
     }
     
     .subscript {
         font-size: 1.4rem;
+    }
+    
+    .color1,
+    .color2,
+    .color3,
+    .color4,
+    .audio {
+        font-size: 3rem;
+        letter-spacing: -0.15rem;
+        cursor: pointer;
+        display: inline;
+    }
+    
+    #theme {
+        position: fixed;
+        top: 90%;
+        flex-direction: column;
+        flex-direction: column;
+    }
+    
+    .button-primary {
+        border: transparent;
     }
 </style>
 
@@ -57,8 +105,8 @@
   –––––––––––––––––––––––––––––––––––––––––––––––––– -->
     <div class="container">
         <div class="row">
-            <div class="twelve column" style="margin-top: 6%">
-                <h3>Typing <span class="light">Master</span><sub id="wpm" class="subscript">00 wpm</sub>
+            <div class="twelve column" style="margin-top: 3%">
+                <h3>Typing <span id="logo" class="light">Master</span><sub id="wpm" class="subscript">00 wpm</sub>
                     <span id="mode" class="u-pull-right" style="cursor: pointer;">🌒</span>
                 </h3>
                 <p style="font-size: 1.8rem" id="paragraph"></p>
@@ -75,6 +123,26 @@
         <div class="row">
             <div class="twelve column" style="margin-top: 2%">
                 <textarea spellcheck="false" class="u-full-width" style="overflow: hidden" placeholder="Type here" id="txtarea"></textarea>
+            </div>
+        </div>
+    </div>
+
+    <div class="container">
+        <div id="theme" class="theme">
+            <div class=" color1">
+                🟠
+            </div>
+            <div class="color2">
+                🟣
+            </div>
+            <div class="color3">
+                🟢
+            </div>
+            <div class="color4">
+                🔵
+            </div>
+            <div class="audio">
+                🔊
             </div>
         </div>
     </div>

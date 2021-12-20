@@ -5,7 +5,7 @@ import para from "./data.js";
 let paragraph = document.getElementById("paragraph");
 //generate paragraph randomly
 paragraph.innerText = para[Math.floor(Math.random() * para.length)];
-//
+//dom variables
 let start = document.getElementById("start");
 let skip = document.getElementById("skip");
 let txtarea = document.getElementById("txtarea");
@@ -13,9 +13,22 @@ let time = document.getElementById("time");
 let mode = document.getElementById("mode");
 let wcount = document.getElementById("wcount");
 let wpm = document.getElementById("wpm");
+let logo = document.getElementById("logo");
+let btn = document.querySelector(".button-primary");
+let body = document.querySelector("body");
+let stroke = document.querySelector(".audio");
+//theme variables
+let orange = document.querySelector(".color1");
+let purple = document.querySelector(".color2");
+let green = document.querySelector(".color3");
+let blue = document.querySelector(".color4");
+let right = "light";
+let wrong = "wrong";
+//helper variables
 let count = 0;
-let status = false; //Timer is or is not
-let darkMode = false; //Dark mode is or is not
+let status = false; //Timer is on or off
+let darkMode = false; //Dark mode is on or off
+let muted = false; //audio is on
 let clearTimer;
 let paraLength = paragraph.innerText.length;
 let highlight = paragraph.innerText.split("").map(alp => {
@@ -29,6 +42,9 @@ let highlightAlp = document.querySelectorAll(".highlight");
 console.log(highlight);
 console.log(highlightAlp);
 
+//dom events
+
+//mode switch
 mode.onclick = function() {
     let bodyStyle = document.body.style;
     bodyStyle.transition = 'all 0.3s ease';
@@ -43,33 +59,34 @@ mode.onclick = function() {
         bodyStyle.color = "#161616";
         darkMode = false;
         mode.innerText = "🌒";
-        txtarea.style.backgroundColor = "white";
+        txtarea.style.backgroundColor = "#fff";
     }
 }
 
-function reset() {
-    paraLength = paragraph.innerText.length;
-    count = 0;
-    txtarea.value = "";
-    txtarea.style.height = "";
-    stopTimer();
-    time.innerText = "Time: 00s";
-    status = false;
-    wcount.innerText = "Alphabet Count: 00";
-    txtarea.disabled = false;
-    highlight = paragraph.innerText.split("").map(alp => {
-        return `<span class="highlight">${alp}</span>`
-    });
-    paragraph.innerHTML = highlight.join("");
-    highlightAlp = document.querySelectorAll(".highlight");
-    wpm.innerHTML = "00 wpm";
+//theme switch
+orange.onclick = function() {
+    themeSwitch("orange", "#FF6723");
 }
 
+purple.onclick = function() {
+    themeSwitch("purple", "#8D65C5");
+}
+
+green.onclick = function() {
+    themeSwitch("green", "#00D26A");
+}
+
+blue.onclick = function() {
+    themeSwitch("light", "rgb(25, 221, 247)")
+}
+
+
+//reset button event
 start.onclick = function() {
-    alert("Reset Success!");
-    reset();
-}
-
+        alert("Reset Success!");
+        reset();
+    }
+    //skip
 skip.onclick = function() {
     paragraph.innerText = para[Math.floor(Math.random() * para.length)];
     reset();
@@ -92,20 +109,75 @@ txtarea.oninput = function() {
     userInput.forEach((val, i) => {
         if (val === highlightAlp[i].innerText) {
 
-            if (highlightAlp[i].classList.contains("wrong")) {
-                highlightAlp[i].classList.remove("wrong");
+            if (highlightAlp[i].classList.contains(wrong)) {
+                highlightAlp[i].classList.remove(wrong);
             }
 
-            highlightAlp[i].classList.add("light");
+            highlightAlp[i].classList.add(right);
         } else {
-            highlightAlp[i].classList.add("wrong");
+            highlightAlp[i].classList.add(wrong);
         }
     })
 };
 
-function stopTimer() {
-    window.clearInterval(clearTimer);
+txtarea.onclick = function() {
+    if (!status) {
+        clearTimer = triggerTimer();
+        status = true;
+    }
 }
+
+//preventing pasting on txtarea
+txtarea.onpaste = (e) => e.preventDefault();
+
+stroke.onclick = function() {
+    if (!muted) {
+        muted = true;
+        stroke.innerText = "🔇";
+    } else {
+        muted = false;
+        stroke.innerText = "🔊";
+    }
+}
+
+body.onkeyup = function() {
+    if (status && !muted) {
+        let audio = new Audio('./stroke.mp3');
+        audio.playbackRate = 3; //
+        audio.play();
+    }
+}
+
+//helper functions
+
+function themeSwitch(color, colorCode) {
+    right = color;
+    logo.className = "";
+    if (!logo.classList.contains(color)) {
+        logo.classList.add(color);
+    }
+    btn.style.backgroundColor = colorCode;
+}
+
+
+function reset() {
+    paraLength = paragraph.innerText.length;
+    count = 0;
+    txtarea.value = "";
+    txtarea.style.height = "";
+    stopTimer();
+    time.innerText = "Time: 00s";
+    status = false;
+    wcount.innerText = "Alphabet Count: 00";
+    txtarea.disabled = false;
+    highlight = paragraph.innerText.split("").map(alp => {
+        return `<span class="highlight">${alp}</span>`
+    });
+    paragraph.innerHTML = highlight.join("");
+    highlightAlp = document.querySelectorAll(".highlight");
+    wpm.innerHTML = "00 wpm";
+}
+
 
 function triggerTimer() {
     return setInterval(() => {
@@ -118,15 +190,10 @@ function triggerTimer() {
     }, 1000);
 }
 
-txtarea.onclick = function() {
-    txtarea.style.transition = "all 0.3s ease";
-    if (!status) {
-        clearTimer = triggerTimer();
-        status = true;
-    }
 
+function stopTimer() {
+    window.clearInterval(clearTimer);
 }
-
 
 let time2 = Date.now();
 console.log(time2 - time1, para.length);
